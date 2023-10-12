@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "subject-screener-v1"
+version = "0.1.0"
+description = ""
+authors = ["Sanie S. Rojas L."]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+pylint = "^3.0.1"
+googlenews = "^1.6.10"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

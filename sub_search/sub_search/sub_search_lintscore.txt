@@ -1,0 +1,30 @@
+************* Module sub_search.sub_search
+sub_search.py:5:0: C0301: Line too long (128/100) (line-too-long)
+sub_search.py:34:0: C0301: Line too long (121/100) (line-too-long)
+sub_search.py:50:0: C0303: Trailing whitespace (trailing-whitespace)
+sub_search.py:70:30: C0303: Trailing whitespace (trailing-whitespace)
+sub_search.py:72:0: C0305: Trailing newlines (trailing-newlines)
+sub_search.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+sub_search.py:1:0: E0401: Unable to import 'GoogleNews' (import-error)
+sub_search.py:2:0: E0401: Unable to import 'pandas' (import-error)
+sub_search.py:4:0: W0105: String statement has no effect (pointless-string-statement)
+sub_search.py:71:12: E1121: Too many positional arguments for function call (too-many-function-args)
+
+-----------------------------------
+Your code has been rated at 0.43/10
+
+************* Module sub_search.sub_search
+sub_search.py:5:0: C0301: Line too long (128/100) (line-too-long)
+sub_search.py:31:0: C0301: Line too long (121/100) (line-too-long)
+sub_search.py:48:0: C0303: Trailing whitespace (trailing-whitespace)
+sub_search.py:66:30: C0303: Trailing whitespace (trailing-whitespace)
+sub_search.py:69:0: C0305: Trailing newlines (trailing-newlines)
+sub_search.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+sub_search.py:1:0: E0401: Unable to import 'GoogleNews' (import-error)
+sub_search.py:2:0: E0401: Unable to import 'pandas' (import-error)
+sub_search.py:4:0: W0105: String statement has no effect (pointless-string-statement)
+sub_search.py:67:12: E1121: Too many positional arguments for function call (too-many-function-args)
+
+------------------------------------------------------------------
+Your code has been rated at 0.43/10 (previous run: 0.43/10, +0.00)
+
