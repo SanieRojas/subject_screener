@@ -1,22 +1,19 @@
+
+"""Functions to setup the instance of a google news search engine, define its period time frame, 
+retrive the results and store them in a file."""
+
 from GoogleNews import GoogleNews
 import pandas as pd
 
-'''
-Functions to setup the instance of a google news search engine, define its period time frame, retrive the results and store them
-in a file.
-
-'''
-
 def setup_engine(period):
     """
-    Set up the google engine to retrieve news of a given period.
+    Set up the google engine to retrieve news of a given period. 
+    Documentation -> https://pypi.org/project/GoogleNews/
 
     :period: defines how much time to search news for. 
-    :type parameter1: 7d [quantity of days + "d"] 
+    :type: 7d [quantity of days + "d"] 
 
-    Next iteration 
-
-    :return: none
+    :return: instance of a search engine
     """
     # Quick off instance
     api = GoogleNews()
@@ -28,14 +25,14 @@ def setup_engine(period):
 
 def setup_subject(api, subject, monitor):
     """
-    Performs a search of "period" days of news for any selected subject theme and, if prompted, saves it into a database. 
-
+    Performs a search of "period" days of news for any selected subject theme and, 
+    if prompted, saves it into a database. 
 
     :monitor: Yes if you want to keep your results. 
-    :type parameter1: Boolean
+    :type: Boolean
     
     :category: Category of search subject
-    :type parameter2: String
+    :type: String
 
     :subject: Subject of interest
     :rtype: String
@@ -45,8 +42,6 @@ def setup_subject(api, subject, monitor):
     """
     # Quick off search
     api.get_news(subject)
-   
-    #print & save results
     results = api.results(sort=True)
     newsfeed = pd.DataFrame(results)
     newsfeed = newsfeed.sort_values(by=["datetime"], ascending=False)
@@ -63,7 +58,5 @@ def setup_subject(api, subject, monitor):
 
 
 if __name__ == "__main__":
-    step1 = setup_engine("1d") 
-    step2 = setup_subject(step1, "Apple", "Companies", "no")
-
-
+    step1 = setup_engine("1d")
+    step2 = setup_subject(step1, "Apple", "no")
