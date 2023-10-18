@@ -26,14 +26,11 @@ def setup_engine(period):
 
 def setup_subject(api, subject, monitor):
     """
-    Performs a search of "period" days of news for any selected subject theme and, 
-    if prompted, saves it into a database. 
+    Performs a search of news for any selected subject theme and, 
+    if prompted, saves it into a database. Inherits the period stablished in the setup_engine function.
 
     :monitor: Yes if you want to keep your results. 
     :type: Boolean
-    
-    :category: Category of search subject
-    :type: String
 
     :subject: Subject of interest
     :rtype: String
@@ -41,16 +38,17 @@ def setup_subject(api, subject, monitor):
     :return: Newsfeed dataframe
     :rtype: pandas dataframe  
     """
-    # Quick off search
+    # Setup log records
     log_text = str(datetime.now().timestamp())[:10]
     log2 = datetime.now().timestamp()
-    log_date = datetime.fromtimestamp(log2)   
+    log_date = datetime.fromtimestamp(log2)
+    #Set up api to retrieve news results
     api.get_news(subject)
     results = api.results(sort=True)
+    #Save to dataframe and file
     newsfeed = pd.DataFrame(results)
     newsfeed[log_date] = log_date
     newsfeed = newsfeed.sort_values(by=["datetime"], ascending=False)
-
 
     if monitor == "yes":
         file_name = f'./file_store_search/news_data_{subject}_{log_text}.csv'
@@ -59,15 +57,15 @@ def setup_subject(api, subject, monitor):
     else:
         pass
 
-    # If the function returns a value, use the "return" statement
+    # Returns a pandas dataframe with the newsfeed gathered and the log_date
     return newsfeed, log_date
 
 
 if __name__ == "__main__":
     step1 = setup_engine("1d")
     user_input_subject = input("Please, indicate what subject would you like to explore.")
-    user_input_keep = input("Plese indicate with yes/no if you want to keep this subject for monitoring.")
+    user_input_keep = input("Indicate (yes/no) if you want to keep this subject for monitoring.")
     step2 = setup_subject(step1, user_input_subject, user_input_keep)
     print("Subject retrieved.")
     print("Amount of records retrieved -> ", len(step2))
-
+    

@@ -28,3 +28,27 @@ sub_search.py:67:12: E1121: Too many positional arguments for function call (too
 ------------------------------------------------------------------
 Your code has been rated at 0.43/10 (previous run: 0.43/10, +0.00)
 
+************* Module sub_search.sub_search
+sub_search.py:47:43: C0303: Trailing whitespace (trailing-whitespace)
+sub_search.py:69:0: C0301: Line too long (106/100) (line-too-long)
+sub_search.py:73:0: C0305: Trailing newlines (trailing-newlines)
+
+------------------------------------------------------------------
+Your code has been rated at 9.03/10 (previous run: 0.43/10, +8.60)
+
+************* Module sub_search.sub_search
+sub_search.py:72:0: C0304: Final newline missing (missing-final-newline)
+
+------------------------------------------------------------------
+Your code has been rated at 9.68/10 (previous run: 9.03/10, +0.65)
+
+
+-------------------------------------------------------------------
+Your code has been rated at 10.00/10 (previous run: 9.68/10, +0.32)
+
+************* Module sub_search.sub_search
+sub_search.py:30:0: C0301: Line too long (103/100) (line-too-long)
+
+-------------------------------------------------------------------
+Your code has been rated at 9.68/10 (previous run: 10.00/10, -0.32)
+
