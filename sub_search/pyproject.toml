@@ -6,7 +6,9 @@ authors = ["Your Name <you@example.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = "^3.8.5"
+googlenews = "^1.6.10"
+datetime = "^5.2"
 
 
 [build-system]

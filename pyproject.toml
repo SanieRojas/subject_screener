@@ -4,11 +4,14 @@ version = "1.0.0"
 description = "App for project"
 authors = ["SRL"]
 readme = "README.md"
+packages = [{include = "sub_search"}]
+
 
 [tool.poetry.dependencies]
 python = "3.8.5"
 transformers = "^4.34.0"
 apache-airflow = "^2.7.2"
+sub-search = {path = "sub_search"}
 
 
 [build-system]
