@@ -1,9 +1,10 @@
 
 """Functions to setup the instance of a google news search engine, define its period time frame, 
 retrive the results and store them in a file."""
-
+from datetime import datetime
 from GoogleNews import GoogleNews
 import pandas as pd
+
 
 def setup_engine(period):
     """
@@ -41,22 +42,32 @@ def setup_subject(api, subject, monitor):
     :rtype: pandas dataframe  
     """
     # Quick off search
+    log_text = str(datetime.now().timestamp())[:10]
+    log2 = datetime.now().timestamp()
+    log_date = datetime.fromtimestamp(log2)   
     api.get_news(subject)
     results = api.results(sort=True)
     newsfeed = pd.DataFrame(results)
+    newsfeed[log_date] = log_date
     newsfeed = newsfeed.sort_values(by=["datetime"], ascending=False)
 
+
     if monitor == "yes":
-        file_name = 'news_data.csv'
+        file_name = f'./file_store_search/news_data_{subject}_{log_text}.csv'
         newsfeed.to_csv(file_name, index=False)
-        print("Corpus succesfully saved to file.")
+        print("Corpus succesfully saved to file ->  ", file_name, "on", log_date)
     else:
         pass
 
     # If the function returns a value, use the "return" statement
-    return newsfeed
+    return newsfeed, log_date
 
 
 if __name__ == "__main__":
     step1 = setup_engine("1d")
-    step2 = setup_subject(step1, "Apple", "no")
+    user_input_subject = input("Please, indicate what subject would you like to explore.")
+    user_input_keep = input("Plese indicate with yes/no if you want to keep this subject for monitoring.")
+    step2 = setup_subject(step1, user_input_subject, user_input_keep)
+    print("Subject retrieved.")
+    print("Amount of records retrieved -> ", len(step2))
+
