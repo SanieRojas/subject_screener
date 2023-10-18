@@ -39,7 +39,7 @@ def setup_subject(api, subject, monitor):
     :rtype: pandas dataframe  
     """
     # Setup log records
-    log_text = str(datetime.now().timestamp())[:10]
+    log_stamp = str(datetime.now().timestamp())[:10]
     log2 = datetime.now().timestamp()
     log_date = datetime.fromtimestamp(log2)
     #Set up api to retrieve news results
@@ -51,7 +51,7 @@ def setup_subject(api, subject, monitor):
     newsfeed = newsfeed.sort_values(by=["datetime"], ascending=False)
 
     if monitor == "yes":
-        file_name = f'./file_store_search/news_data_{subject}_{log_text}.csv'
+        file_name = f'./file_store_search/news_data_{subject}_{log_stamp}.csv'
         newsfeed.to_csv(file_name, index=False)
         print("Corpus succesfully saved to file ->  ", file_name, "on", log_date)
     else:
