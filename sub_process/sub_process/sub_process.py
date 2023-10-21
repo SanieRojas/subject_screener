@@ -1,4 +1,10 @@
 """Analyzing text retrieved per subject"""
+
+folder_pointer = 'C:/Users/sanie.s.rojas.lobo/Desktop/ITBA Bucket/subject_screener/file_store_search/raw/'
+folder_destiny = 'C:/Users/sanie.s.rojas.lobo/Desktop/ITBA Bucket/subject_screener/file_store_search/processed/'
+subject = "test"
+
+#importing libraries
 import re
 import json
 import pandas as pd
@@ -14,13 +20,16 @@ nltk.download('words', quiet=True)
 nltk.download('averaged_perceptron_tagger', quiet=True)
 
 
-def file_to_df(user_folder, user_file):
+def file_to_df(user_file):
     """ Process the file into a pandas dataframe."""
-    user_folder = input("Please introduce URL to working folder: ->  ")
     user_file = input("Please enter file name: ->  ")
-    file_pointer = f"{user_folder}{user_file}"
+    file_pointer = f"{folder_pointer}{user_file}"
     df = pd.read_csv(file_pointer)
     return df
+
+#def get_subject(df):
+#    subject = user_file.str.slice(9, len(user_file)-6)
+#    return df, subject
 
 def clean_text(text):
     """ Clean text."""
@@ -32,16 +41,18 @@ def clean_text(text):
 
 def get_headlines_df(df):
     """ Get headlines."""
-    headlines = df.drop(columns=['desc','site','link','img','media','2023-10-17 23:17:49.446507'], axis=1)
+    headlines = df.drop(columns=['desc','site','link','img','media','log_date'], axis=1)
     return headlines
 
-def generate_txt(df, filename):
+def generate_txt(df):
     """ Generates .txt file for furhter analysis."""
-    filename = input("Please enter file name expected: ->  ")
+    filename = input("Please enter file name expected for the TXT file without the extension .txt: ->  ")
+    filename = filename + ".txt"
+    file_pointer = f"{folder_destiny}{filename}"
     # Extract the specified column as a Pandas Series & Save the column data as text in a .txt file
     column_data = df["title"]
-    column_data.to_csv(filename, header=False, index=False, sep='\t')
-    return print("Saved succesfully. The titles have been saved as text in {filename}'")
+    column_data.to_csv(file_pointer, header=False, index=False, sep='\t')
+    return print(f"Saved succesfully. The titles have been saved as text in {filename}'")
 
 def get_scores(df):
     """ Get scores."""
@@ -78,11 +89,10 @@ def extract_entities(text_file):
 
 if __name__ == "__main__":
 
-    user_folder = "hi"
     user_file = "hi"
 
     #import file
-    dfn = file_to_df(user_folder, user_file)
+    dfn = file_to_df(user_file)
     #transform to optimize for semantic analysis in various forms
     dfn['tokens'] = dfn['title'].apply(clean_text)
     #simplify for analysis
@@ -90,19 +100,16 @@ if __name__ == "__main__":
     #obtain sentiment score
     get_scores(headlines)
     #save results by date to csv - txt
-    filename = "Israel.txt" #!!!!!!!!!!!!!!!!!!!!!!!
-    generate_txt(headlines, filename)
+    generate_txt(headlines)
     #obtain main entities involved & save top 10 to subject by date
     headlines["named_entities"] = headlines["title"].apply(extract_named_entities)
     #save to CSV
-    output_csv = "processed news" #!!!!!!!!!!!!!!!!!!!!!!
-    headlines.to_csv(output_csv, header=False, index=False, sep='\t') 
-    #generate main entities & sort them 
-    entities = extract_entities("israel_output.txt")
+    output_csv = f"{folder_destiny}processed_{subject}.txt"
+    file_csv= headlines.to_csv(output_csv, header=False, index=False, sep='\t')
+    #generate main entities & sort them
+    entities = extract_entities(output_csv)
     sorted_entities = dict(sorted(entities.items(), key=lambda item: item[1], reverse=True))
-    #also save to csv
-    output_csv_2 = "main_entities"
-
-    with open("sorted_entities.json", "w") as file:
+    #also save to json
+    with open(f"{folder_destiny}sorted_entities_{subject}.json", "w") as file:
         json.dump(sorted_entities, file)
     print("Sub_process complete")
