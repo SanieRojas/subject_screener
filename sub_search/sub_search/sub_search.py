@@ -5,6 +5,7 @@ from datetime import datetime
 from GoogleNews import GoogleNews
 import pandas as pd
 
+folder_destiny = 'C:/Users/sanie.s.rojas.lobo/Desktop/ITBA Bucket/subject_screener/file_store_search/raw/'
 
 def setup_engine(period):
     """
@@ -39,7 +40,7 @@ def setup_subject(api, subject, monitor):
     :rtype: pandas dataframe  
     """
     # Setup log records
-    log_stamp = str(datetime.now().timestamp())[:10]
+    log_stamp = str(datetime.now().timestamp())[:5]
     log2 = datetime.now().timestamp()
     log_date = datetime.fromtimestamp(log2)
     #Set up api to retrieve news results
@@ -47,11 +48,11 @@ def setup_subject(api, subject, monitor):
     results = api.results(sort=True)
     #Save to dataframe and file
     newsfeed = pd.DataFrame(results)
-    newsfeed[log_date] = log_date
+    newsfeed["log_date"] = log2
     newsfeed = newsfeed.sort_values(by=["datetime"], ascending=False)
 
     if monitor == "yes":
-        file_name = f'./file_store_search/news_data_{subject}_{log_stamp}.csv'
+        file_name = f'{folder_destiny}newsfeed_{subject}_{log_stamp}.csv'
         newsfeed.to_csv(file_name, index=False)
         print("Corpus succesfully saved to file ->  ", file_name, "on", log_date)
     else:
@@ -63,9 +64,9 @@ def setup_subject(api, subject, monitor):
 
 if __name__ == "__main__":
     step1 = setup_engine("1d")
-    user_input_subject = input("Please, indicate what subject would you like to explore.")
-    user_input_keep = input("Indicate (yes/no) if you want to keep this subject for monitoring.")
+    user_input_subject = input("Please, indicate what subject would you like to explore. -> ")
+    user_input_keep = input("Indicate (yes/no) if you want to keep this subject for monitoring. -> ")
     step2 = setup_subject(step1, user_input_subject, user_input_keep)
-    print("Subject retrieved.")
-    print("Amount of records retrieved -> ", len(step2))
+    print("Subject retrieved succesfully.")
+    #print("Amount of records retrieved -> ", len(step2))
     

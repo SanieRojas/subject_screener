@@ -2,7 +2,7 @@
 
 folder_pointer = 'C:/Users/sanie.s.rojas.lobo/Desktop/ITBA Bucket/subject_screener/file_store_search/raw/'
 folder_destiny = 'C:/Users/sanie.s.rojas.lobo/Desktop/ITBA Bucket/subject_screener/file_store_search/processed/'
-subject = "test"
+subject = "subject_initializer"
 
 #importing libraries
 import re
@@ -19,17 +19,19 @@ nltk.download('maxent_ne_chunker', quiet=True)
 nltk.download('words', quiet=True)
 nltk.download('averaged_perceptron_tagger', quiet=True)
 
+def get_subject(file):
+    """ getting subject """
+    subject = file.str.slice(9, len(user_file)-6)
+    return subject
 
 def file_to_df(user_file):
     """ Process the file into a pandas dataframe."""
-    user_file = input("Please enter file name: ->  ")
+    user_file = input("Please enter file name to be analyzed: ->  ")
+    global subject
+    subject = user_file[9:-6]
     file_pointer = f"{folder_pointer}{user_file}"
     df = pd.read_csv(file_pointer)
     return df
-
-#def get_subject(df):
-#    subject = user_file.str.slice(9, len(user_file)-6)
-#    return df, subject
 
 def clean_text(text):
     """ Clean text."""
@@ -76,7 +78,7 @@ def extract_named_entities(text):
 #codigo a auditar #!!!!!!!!!!!!!!!!!!!!!!!
 def extract_entities(text_file):
     """ extract main entities."""
-    with open(text_file, 'r') as f:
+    with open(text_file, 'r',  encoding='utf-8') as f:
         text = f.read()
     entities = {}
     for sent in nltk.sent_tokenize(text):
@@ -93,6 +95,7 @@ if __name__ == "__main__":
 
     #import file
     dfn = file_to_df(user_file)
+
     #transform to optimize for semantic analysis in various forms
     dfn['tokens'] = dfn['title'].apply(clean_text)
     #simplify for analysis
@@ -104,12 +107,12 @@ if __name__ == "__main__":
     #obtain main entities involved & save top 10 to subject by date
     headlines["named_entities"] = headlines["title"].apply(extract_named_entities)
     #save to CSV
-    output_csv = f"{folder_destiny}processed_{subject}.txt"
+    output_csv = f"{folder_destiny}/dataframes/{subject}.csv"
     file_csv= headlines.to_csv(output_csv, header=False, index=False, sep='\t')
     #generate main entities & sort them
     entities = extract_entities(output_csv)
     sorted_entities = dict(sorted(entities.items(), key=lambda item: item[1], reverse=True))
     #also save to json
-    with open(f"{folder_destiny}sorted_entities_{subject}.json", "w") as file:
+    with open(f"{folder_destiny}/jsons/sorted_entities_{subject}.json", "w") as file:
         json.dump(sorted_entities, file)
     print("Sub_process complete")
