@@ -1,6 +1,6 @@
 """Analyzing text retrieved per subject"""
 
-folder_pointer = 'C:/Users/sanie.s.rojas.lobo/Desktop/ITBA Bucket/subject_screener/file_store_search/raw/'
+folder_pointer = 'C:/Users/sanie.s.rojas.lobo/Desktop/ITBA Bucket/subject_screener/file_store_search/raw/accum/'
 folder_destiny = 'C:/Users/sanie.s.rojas.lobo/Desktop/ITBA Bucket/subject_screener/file_store_search/processed/'
 subject = "subject_initializer"
 
@@ -18,11 +18,6 @@ nltk.download(['stopwords', 'vader_lexicon', 'punkt'], quiet=True)
 nltk.download('maxent_ne_chunker', quiet=True)
 nltk.download('words', quiet=True)
 nltk.download('averaged_perceptron_tagger', quiet=True)
-
-def get_subject(file):
-    """ getting subject """
-    subject = file.str.slice(9, len(user_file)-6)
-    return subject
 
 def file_to_df(user_file):
     """ Process the file into a pandas dataframe."""
@@ -43,8 +38,8 @@ def clean_text(text):
 
 def get_headlines_df(df):
     """ Get headlines."""
-    headlines = df.drop(columns=['desc','site','link','img','media','log_date'], axis=1)
-    return headlines
+    headlinesf = df.drop(columns=['desc','site','link','img','media','log_date'], axis=1)
+    return headlinesf
 
 def generate_txt(df):
     """ Generates .txt file for furhter analysis."""
@@ -80,13 +75,13 @@ def extract_entities(text_file):
     """ extract main entities."""
     with open(text_file, 'r',  encoding='utf-8') as f:
         text = f.read()
-    entities = {}
+    entitiesf = {}
     for sent in nltk.sent_tokenize(text):
         for chunk in nltk.ne_chunk(nltk.pos_tag(nltk.word_tokenize(sent))):
             if hasattr(chunk, 'label'):
                 entity = ' '.join(c[0] for c in chunk)
-                entities[entity] = entities.get(entity, 0) + 1
-    return entities
+                entitiesf[entity] = entitiesf.get(entity, 0) + 1
+    return entitiesf
 #------
 
 if __name__ == "__main__":
@@ -105,14 +100,14 @@ if __name__ == "__main__":
     #save results by date to csv - txt
     generate_txt(headlines)
     #obtain main entities involved & save top 10 to subject by date
-    headlines["named_entities"] = headlines["title"].apply(extract_named_entities)
+    #headlines["named_entities"] = headlines["title"].apply(extract_named_entities)
     #save to CSV
     output_csv = f"{folder_destiny}/dataframes/{subject}.csv"
-    file_csv= headlines.to_csv(output_csv, header=False, index=False, sep='\t')
+    file_csv= headlines.to_csv(output_csv, header=True, index=False, sep=',')
     #generate main entities & sort them
     entities = extract_entities(output_csv)
     sorted_entities = dict(sorted(entities.items(), key=lambda item: item[1], reverse=True))
     #also save to json
-    with open(f"{folder_destiny}/jsons/sorted_entities_{subject}.json", "w") as file:
+    with open(f"{folder_destiny}/jsons/sorted_entities_{subject}.json", "w", encoding='utf-8') as file:
         json.dump(sorted_entities, file)
     print("Sub_process complete")

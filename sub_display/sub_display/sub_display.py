@@ -7,8 +7,8 @@ folder_pointer = "C:/Users/sanie.s.rojas.lobo/Desktop/ITBA Bucket/subject_screen
 folder_txt = f'{folder_pointer}text/'
 folder_json =  f'{folder_pointer}jsons/'
 folder_dfs =   f'{folder_pointer}dataframes/'
-file_pointer = "predictions 2024_169.csv"
-subject = "test_display"
+file_pointer = "data_acc.csv"
+subject = "data_acc_1"
 
 folder_destiny = "C:/Users/sanie.s.rojas.lobo/Desktop/ITBA Bucket/subject_screener/file_store_search/images/"
 
@@ -27,3 +27,4 @@ print(average_score, mean_by_day)
 
 daily_score = mean_by_day.plot()
 plt.savefig(f'{folder_destiny}line_plot_{subject}.png', dpi=300, bbox_inches='tight')
+

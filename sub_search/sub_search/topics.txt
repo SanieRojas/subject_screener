@@ -1,0 +1,86 @@
+
+Topics to monitor 
+
+topics = [("Middle-East-Tensions", "Rusia-China-Alliance", "US-Military", "Cybersecurity-threats", "energy-resources", "aerospace", "infrastructure-vulnerabilities", "financial-markets", "supranational-events" )]
+
+
+Tensions in the Middle East: Search for the latest developments in the Middle East, including tensions involving Iran and Israel. Look for information on diplomatic efforts, military deployments, and potential flashpoints in the region.
+Russia-China Alliance: Explore news about the relationship between Russia and China, as their alliance could play a significant role in a global conflict scenario.
+United States' Military Actions: Stay informed about the United States' military and foreign policy actions, including troop deployments, strategic decisions, and alliances.
+Cybersecurity Threats: Monitor news related to cybersecurity threats, as potential cyberattacks can disrupt various industries and supply chains.
+Energy Resources: Keep an eye on developments in the energy sector, as oil and gas supplies could be affected by a global conflict, impacting manufacturers and consumers.
+Aerospace and Defense Industry: Track developments in the aerospace and defense industry, as these sectors play a crucial role in military conflicts. Major defense manufacturers may be at risk in such a scenario.
+Critical Infrastructure Vulnerabilities: Research potential vulnerabilities in critical infrastructure, such as power grids, water supplies, and transportation systems, which could be targeted in times of conflict.
+Food Security: Stay informed about food production, distribution, and supply chain issues, as disruptions can impact access to food.
+Global Financial Markets: Monitor global financial markets for fluctuations and impacts on the economy, which can affect businesses and manufacturers.
+Humanitarian Crises and Refugee Movements: Pay attention to news about humanitarian crises and refugee movements, as these can have wide-ranging impacts on regional stability.
+
+keywords_middle_east = [
+    "Iran-Israel conflict",
+    "Middle East diplomacy",
+    "Iran nuclear deal",
+    "Regional security",
+    "Proxy wars",
+    "Strait of Hormuz",
+    "Nuclear proliferation",
+    "US military presence",
+    "Jerusalem tensions",
+    "Hezbollah threats",
+    "Gulf states",
+    "Syrian conflict",
+    "Saudi Arabia-Iran rivalry",
+    "Hamas activities",
+    "Iran's regional influence",
+    "Israeli settlements",
+    "Yemen crisis",
+    "Iraq instability",
+    "Kurdish issues",
+    "Lebanon unrest"
+]
+
+Russia-China Alliance:
+keywords_russia_china = [
+    "Sino-Russian relations",
+    "Eurasian Economic Union",
+    "Belt and Road Initiative",
+    "Military cooperation",
+    "Arctic interests",
+    "Trade agreements",
+    "Strategic partnerships",
+    "Security cooperation",
+    "SCO (Shanghai Cooperation Organization)",
+    "Energy partnerships",
+    "Cybersecurity collaboration",
+    "Joint military exercises",
+    "Border disputes",
+    "UN Security Council positions",
+    "SCO expansion",
+    "Arms trade",
+    "Technology transfer",
+    "Regional influence",
+    "Silk Road diplomacy",
+    "BRICS cooperation"
+]
+
+
+United States' Military Actions:
+
+keywords_us_military = [
+    "US military deployments",
+    "Defense budget",
+    "Overseas bases",
+    "NATO commitments",
+    "Pacific pivot",
+    "Military alliances",
+    "Space Force",
+    "Cyber warfare",
+    "Defense strategy",
+    "Nuclear arsenal",
+    "Military exercises",
+    "Arms control treaties",
+    "Naval presence",
+    "Military modernization",
+    "Troop withdrawal",
+    "Counterterrorism operations",
+    "
+

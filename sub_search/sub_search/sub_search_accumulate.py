@@ -5,7 +5,7 @@ from datetime import datetime
 from GoogleNews import GoogleNews
 import pandas as pd
 
-folder_destiny = 'C:/Users/sanie.s.rojas.lobo/Desktop/ITBA Bucket/subject_screener/file_store_search/raw/'
+folder_destiny = 'C:/Users/sanie.s.rojas.lobo/Desktop/ITBA Bucket/subject_screener/file_store_search/raw/accum/'
 
 def setup_engine(period):
     """
@@ -64,10 +64,15 @@ def setup_subject(api, subject, monitor):
 
 
 if __name__ == "__main__":
-    step1 = setup_engine("60d")
-    user_input_subject = input("Please, indicate what subject would you like to explore. -> ")
-    user_input_keep = input("Indicate (yes/no) if you want to keep this subject for monitoring. -> ")
-    step2 = setup_subject(step1, user_input_subject, user_input_keep)
-    print("Subject retrieved succesfully.")
-    #print("Amount of records retrieved -> ", len(step2))
+    topics =  ["Middle-East-Tensions", "Rusia-China-Alliance", "US-Military", "Cybersecurity-threats", "energy-resources", "aerospace", "infrastructure-vulnerabilities", "financial-markets", "supranational-events"]
+
+    for topic in topics:
+        step1 = setup_engine("10d")
+        step2 = setup_subject(step1, topic, "yes")
+        print(f"Subject retrieved succesfully: {topic}")
+        
+
+
+
+    
     

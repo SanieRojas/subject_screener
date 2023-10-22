@@ -1,16 +1,13 @@
-""" setup ciclycal retrieval of news"""
-from datetime import datetime
-from airflow import DAG
-from airflow.operators.python_operator import PythonOperator
-from airflow.contrib.hooks.gcs_hook import GoogleCloudStorageHook
-from airflow.contrib.operators.bigquery_operator import BigQueryOperator
-from google.cloud import bigquery
-import requests
-import pandas as pd
-
 def extract_and_load_to_df():
-## fill 
+    # Extrae los datos de la API
+    response = requests.get('http://api.example.com/data')
+    data = response.json()
 
+    # Carga los datos en un DataFrame de pandas
+    df = pd.DataFrame(data)
+
+    # Guarda el DataFrame en el XComs para que esté disponible para otras tareas
+    return df.to_json()
 
 def save_to_gcs(**context):
     # Carga el DataFrame desde XComs

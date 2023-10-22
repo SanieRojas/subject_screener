@@ -8,6 +8,7 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.8.5"
 pywordcloud = "^0.2.2"
+matplotlib = "2.2.5"
 
 
 [build-system]
