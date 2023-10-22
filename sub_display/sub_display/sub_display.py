@@ -1,41 +1,29 @@
 """display a wordcloud of content"""
-##from wordcloud import WordCloud
-#import matplotlib.pyplot as plt
-import pandas as pd
-#from pywordcloud import create_wordcloud, save_wordcloud
 
-#import nltk
-#from nltk.tokenize import word_tokenize
-#nltk.download(['stopwords', 'vader_lexicon', 'punkt'], quiet=True) 
-#stopwords = nltk.corpus.stopwords.words("english")
+import pandas as pd
+import matplotlib.pyplot as plt 
+
 folder_pointer = "C:/Users/sanie.s.rojas.lobo/Desktop/ITBA Bucket/subject_screener/file_store_search/processed/"
 folder_txt = f'{folder_pointer}text/'
 folder_json =  f'{folder_pointer}jsons/'
 folder_dfs =   f'{folder_pointer}dataframes/'
-file_pointer = "news_data_palestine_1697589162.csv"
+file_pointer = "predictions 2024_169.csv"
 subject = "test_display"
 
+folder_destiny = "C:/Users/sanie.s.rojas.lobo/Desktop/ITBA Bucket/subject_screener/file_store_search/images/"
 
-newsfeed = pd.read_csv(f'{folder_pointer}{file_pointer}')
-text = " ".join(line.split()[1] for line in newsfeed["title"])
+newsfeed = pd.read_csv(f'{folder_dfs}{file_pointer}')
+metadata= newsfeed.drop(columns=['title', 'tokens'], axis=1)
 
-##vwordcloud = WordCloud(width=480, height=480, stopwords = stopwords, background_color= "white").generate(text)
-#plt.figure()
-#plt.imshow(wordcloud, interpolation="bilinear")
-#plt.axis("off")
-#plt.margins(x=0, y=0)
-#plt.show()
+metadata["datetime"] = pd.to_datetime(metadata["datetime"])
+metadata["score"] = metadata["score"].astype(float)
 
-#plt.title("Scatter Plot Example")
+average_score= metadata['score'].mean()
 
-# Save the visualization as an image
-#plt.savefig("wordcloud.png", dpi=300, format="png")
+daily_indexed = metadata.set_index('datetime')
+mean_by_day = daily_indexed["score"].resample('D').mean()
 
-##wordcloud.to_file("wordcloud.png")
+print(average_score, mean_by_day)
 
-
-#wordcloud = create_wordcloud(text)
-#save_wordcloud(wordcloud, "wordcloud.png")
-
-newsfeed.plot(x='Month', y='Sales', kind='bar')
-
+daily_score = mean_by_day.plot()
+plt.savefig(f'{folder_destiny}line_plot_{subject}.png', dpi=300, bbox_inches='tight')
