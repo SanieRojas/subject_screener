@@ -50,7 +50,7 @@ def generate_txt(df):
     """ Generates .txt file for furhter analysis."""
     filename = input("Please enter file name expected for the TXT file without the extension .txt: ->  ")
     filename = filename + ".txt"
-    file_pointer = f"{folder_destiny}{filename}"
+    file_pointer = f"{folder_destiny}text/{filename}"
     # Extract the specified column as a Pandas Series & Save the column data as text in a .txt file
     column_data = df["title"]
     column_data.to_csv(file_pointer, header=False, index=False, sep='\t')
