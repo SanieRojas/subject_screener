@@ -1,2 +1,2 @@
 # Ignore editor-specific files
-./credentials
+credentials/

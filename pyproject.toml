@@ -13,6 +13,7 @@ transformers = "^4.34.0"
 apache-airflow = "^2.7.2"
 sub-search = {path = "sub_search"}
 sub-process = {path = "sub_process"}
+google-cloud-bigquery = "^3.12.0"
 
 
 [build-system]

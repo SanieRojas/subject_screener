@@ -56,6 +56,7 @@ def setup_subject(api, subject, monitor):
         newsfeed["subject"] = subject
         newsfeed.to_csv(file_name, index=False)
         print("Corpus succesfully saved to file ->  ", file_name, "on", log_date)
+
     else:
         pass
 

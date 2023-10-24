@@ -1,6 +1,8 @@
 
-"""Functions to setup the instance of a google news search engine, define its period time frame, 
-retrive the results and store them in a file."""
+"""Functions to setup the instance of a google news search engine, define its period time frame,
+select subjects to monitor, retrive the results and store them in several files, one by subject, 
+ which will later be compiled in sub_process_accumulate."""
+
 from datetime import datetime
 from GoogleNews import GoogleNews
 import pandas as pd
@@ -36,11 +38,11 @@ def setup_subject(api, subject, monitor):
     :subject: Subject of interest
     :rtype: String
 
-    :return: Newsfeed dataframe
-    :rtype: pandas dataframe  
+    :return: Newsfeed dataframe, log date 
+    :rtype: pandas dataframe, date   
     """
     # Setup log records
-    log_stamp = str(datetime.now().timestamp())[:5]
+    log_stamp = str(datetime.now().timestamp())[:10]
     log2 = datetime.now().timestamp()
     log_date = datetime.fromtimestamp(log2)
     #Set up api to retrieve news results
@@ -64,15 +66,21 @@ def setup_subject(api, subject, monitor):
 
 
 if __name__ == "__main__":
-    topics =  ["Middle-East-Tensions", "Rusia-China-Alliance", "US-Military", "Cybersecurity-threats", "energy-resources", "aerospace", "infrastructure-vulnerabilities", "financial-markets", "supranational-events"]
+    #set up topics to monitor 
+    topics =  ["Middle-East-Tensions", 
+               "Rusia-China-Alliance", 
+               "US-Military", 
+               "Cybersecurity-threats", 
+               "energy-resources", 
+               "aerospace", 
+               "infrastructure-vulnerabilities", 
+               "financial-markets", 
+               "supranational-events"]
 
+    #call the functions 
     for topic in topics:
-        step1 = setup_engine("10d")
-        step2 = setup_subject(step1, topic, "yes")
+        step1 = setup_engine("10d") #sub_search.sub_search_accumulate.py
+        step2 = setup_subject(step1, topic, "yes") #sub_search.sub_search_accumulate.py
         print(f"Subject retrieved succesfully: {topic}")
-        
 
-
-
-    
     

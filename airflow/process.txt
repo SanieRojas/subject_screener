@@ -1,0 +1,5 @@
+- Sub_search = searches and retrieves raw documents of the last hours of news for each topic 
+- Sub_process = compiles all the raw files and obtains tokens and scores, save to csvs and upload to google 
+
+
+- Sub_display = not required - prints the results scores by day 
